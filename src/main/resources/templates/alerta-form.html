@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${alerta.id != null} ? 'Editar Alerta' : 'Registrar Alerta'">Registrar Alerta</title>
+    <link rel="stylesheet" th:href="@{/css/alerta-form.css}">
+</head>
+<body>
+
+<div class="modal-overlay">
+    <div class="modal">
+        <h2 th:text="${alerta.id != null} ? 'Editar Alerta' : 'Registrar Alerta'">Registrar Alerta</h2>
+
+        <form th:action="@{/alerta/guardar}" th:object="${alerta}" method="post">
+
+            <!-- Errores globales -->
+            <div th:if="${#fields.hasErrors('*')}" class="error-global">
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                </ul>
+            </div>
+
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="grupo">
+                <label>Año</label>
+                <input type="number" th:field="*{anio}" min="2000" max="2099" required>
+                <div th:errors="*{anio}" class="error"></div>
+
+                <label>Gestor</label>
+                <input type="text" th:field="*{gestor}" required>
+                <div th:errors="*{gestor}" class="error"></div>
+            </div>
+
+            <label>Título de la Alerta</label>
+            <input type="text" th:field="*{titulo}" required>
+            <div th:errors="*{titulo}" class="error"></div>
+
+            <div class="grupo">
+                <label>Departamento</label>
+                <select id="departamento" th:field="*{departamento}" th:attr="data-valor=${alerta.departamento}" required>
+                    <option value="">Seleccione</option>
+                </select>
+                <div th:errors="*{departamento}" class="error"></div>
+
+                <label>Provincia</label>
+                <select id="provincia" th:field="*{provincia}" th:attr="data-valor=${alerta.provincia}" required>
+                    <option value="">Seleccione</option>
+                </select>
+                <div th:errors="*{provincia}" class="error"></div>
+
+                <label>Distrito</label>
+                <select id="distrito" th:field="*{distrito}" th:attr="data-valor=${alerta.distrito}" required>
+                    <option value="">Seleccione</option>
+                </select>
+                <div th:errors="*{distrito}" class="error"></div>
+            </div>
+
+            <div class="grupo">
+                <label>Localidad</label>
+                <input type="text" th:field="*{localidad}" required>
+                <div th:errors="*{localidad}" class="error"></div>
+
+                <label>Fecha evento</label>
+                <input type="date" th:field="*{fechaEvento}" th:value="${#temporals.format(alerta.fechaEvento, 'yyyy-MM-dd')}" required>
+                <div th:errors="*{fechaEvento}" class="error"></div>
+
+                <label>Hora evento</label>
+                <input type="time" th:field="*{horaEvento}" th:value="${#temporals.format(alerta.horaEvento, 'HH:mm')}" required>
+                <div th:errors="*{horaEvento}" class="error"></div>
+            </div>
+
+            <label>Acciones de protesta</label>
+            <input type="text" th:field="*{acciones}" required>
+            <div th:errors="*{acciones}" class="error"></div>
+
+            <label>Descripción</label>
+            <textarea th:field="*{descripcion}" rows="3" required></textarea>
+            <div th:errors="*{descripcion}" class="error"></div>
+
+            <div class="grupo">
+                <label>Tipo de Demandas</label>
+                <select th:field="*{tipoDemanda}" required>
+                    <option value="">Seleccione</option>
+                    <option value="Gestión pública nacional">Gestión pública nacional</option>
+                    <option value="Recursos naturales">Recursos naturales</option>
+                    <option value="Medio ambiente">Medio ambiente</option>
+                    <option value="Servicios básicos">Servicios básicos</option>
+                    <option value="Educación">Educación</option>
+                    <option value="Salud">Salud</option>
+                    <option value="Otros">Otros</option>
+                </select>
+                <div th:errors="*{tipoDemanda}" class="error"></div>
+
+                <label>Demandas</label>
+                <input type="text" th:field="*{demanda}">
+                <div th:errors="*{demanda}" class="error"></div>
+            </div>
+
+            <div class="grupo">
+                <label>Tipo de Demandantes</label>
+                <select th:field="*{tipoDemandantes}" required>
+                    <option value="">Seleccione</option>
+                    <option value="Rondas Campesinas">Rondas Campesinas</option>
+                    <option value="Comunidades Campesinas">Comunidades Campesinas</option>
+                    <option value="Frente de defensa">Frente de defensa</option>
+                    <option value="Población organizada">Población organizada</option>
+                    <option value="Dirigentes locales">Dirigentes locales</option>
+                    <option value="Otros">Otros</option>
+                </select>
+                <div th:errors="*{tipoDemandantes}" class="error"></div>
+
+                <label>Organización de Demandantes</label>
+                <select th:field="*{organizacionDemandantes}" required>
+                    <option value="">Seleccione</option>
+                    <option value="Rondas regionales">Rondas regionales</option>
+                    <option value="Rondas provinciales">Rondas provinciales</option>
+                    <option value="Rondas distritales">Rondas distritales</option>
+                    <option value="Otros niveles">Otros niveles</option>
+                </select>
+                <div th:errors="*{organizacionDemandantes}" class="error"></div>
+            </div>
+
+            <label>ACTORES Dirigentes / Organizaciones</label>
+            <textarea th:field="*{actores}" rows="3"></textarea>
+            <div th:errors="*{actores}" class="error"></div>
+
+            <div class="grupo">
+                <label>Tipo de Demandado</label>
+                <select th:field="*{tipoDemandado}">
+                    <option value="">Seleccione</option>
+                    <option value="Gobierno nacional">Gobierno nacional</option>
+                    <option value="Gobierno regional">Gobierno regional</option>
+                    <option value="Gobierno local">Gobierno local</option>
+                    <option value="Empresa privada">Empresa privada</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                <div th:errors="*{tipoDemandado}" class="error"></div>
+
+                <label>Detalle demandados</label>
+                <input type="text" th:field="*{detalleDemandado}">
+                <div th:errors="*{detalleDemandado}" class="error"></div>
+            </div>
+
+            <div class="grupo">
+                <label>Nivel de riesgo</label>
+                <select th:field="*{nivelRiesgo}">
+                    <option value="">Seleccione</option>
+                    <option value="BAJO">BAJO</option>
+                    <option value="MEDIO">MEDIO</option>
+                    <option value="ALTO">ALTO</option>
+                </select>
+                <div th:errors="*{nivelRiesgo}" class="error"></div>
+
+                <label>Descripción del riesgo</label>
+                <input type="text" th:field="*{descripcionRiesgo}">
+                <div th:errors="*{descripcionRiesgo}" class="error"></div>
+            </div>
+
+            <label>Acciones DRC</label>
+            <input type="text" th:field="*{accionesDRC}">
+            <div th:errors="*{accionesDRC}" class="error"></div>
+
+
+            <label>Proyección / Riesgo</label>
+            <input type="text" th:field="*{proyeccion}">
+            <div th:errors="*{proyeccion}" class="error"></div>
+
+            <label>Recomendaciones</label>
+            <input type="text" th:field="*{recomendaciones}">
+            <div th:errors="*{recomendaciones}" class="error"></div>
+
+            <label>
+                <input type="checkbox" th:field="*{coordinacion}"> Coordinación DIPREGESCON
+            </label>
+
+            <div class="botones">
+                <button type="submit" class="btn-grabar">Grabar</button>
+                <a th:href="@{/dashboard}" class="btn-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/ubigeo.js"></script>
+
+</body>
+</html>

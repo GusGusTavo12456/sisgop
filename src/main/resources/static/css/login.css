@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.browser-bar {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #ccc;
+}
+
+.url {
+    padding-left: 10px;
+    font-family: monospace;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.logo-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.escudo {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.ministerio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ministerio .rojo {
+    background-color: #d32f2f;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.ministerio .gris {
+    background-color: #424242;
+    color: white;
+    padding: 5px 10px;
+    font-weight: normal;
+}
+
+h2, h3 {
+    margin: 10px 0;
+}
+
+.login-box {
+    display: inline-block;
+    background-color: #f2f2f2;
+    padding: 20px 30px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0 12px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.olvide {
+    font-size: 13px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.olvide:hover {
+    text-decoration: underline;
+}

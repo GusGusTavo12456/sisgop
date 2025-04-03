@@ -1,0 +1,208 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+.layout {
+    display: flex;
+}
+
+/* Sidebar (menú lateral) */
+.sidebar {
+    width: 240px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    min-height: 100vh;
+    padding: 20px 15px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.ministerio-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.min-rojo {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.min-gris {
+    font-size: 0.9em;
+    color: #bdc3c7;
+}
+
+.user-box {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user-box img {
+    border-radius: 50%;
+}
+
+.user-box a {
+    color: #ecf0f1;
+    font-size: 0.85em;
+    text-decoration: underline;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0.95em;
+}
+
+nav ul li {
+    margin: 10px 0;
+    padding-left: 10px;
+}
+
+nav ul li strong {
+    display: block;
+    margin-top: 15px;
+    font-size: 0.95em;
+    color: #f1c40f;
+}
+
+/* Contenido principal */
+.content {
+    flex: 1;
+    padding: 30px;
+    background-color: #fff;
+}
+
+h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+/* Filtros */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: flex-end;
+}
+
+.search-box {
+    position: relative;
+}
+
+.input-text {
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 16px;
+    color: #999;
+}
+
+.grupo {
+    display: flex;
+    gap: 10px;
+}
+
+.grupo-item {
+    display: flex;
+    flex-direction: column;
+}
+
+select {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Botones */
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95em;
+}
+
+.btn-buscar {
+    background-color: #2980b9;
+    color: #fff;
+}
+
+.btn-agregar {
+    background-color: #27ae60;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-excel {
+    background-color: #16a085;
+    color: #fff;
+}
+
+/* Tabla de alertas */
+.tabla-alertas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #fafafa;
+}
+
+.tabla-alertas th,
+.tabla-alertas td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+.tabla-alertas th {
+    background-color: #ecf0f1;
+    font-weight: bold;
+}
+
+.tabla-alertas tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabla-alertas img {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+/* Paginación */
+.paginacion {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.paginacion a,
+.paginacion button {
+    padding: 6px 12px;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.paginacion .activo {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    border-color: #2980b9;
+}

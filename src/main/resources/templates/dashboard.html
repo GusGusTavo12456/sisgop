@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Alertas</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+<div class="layout">
+
+    <!-- Menú lateral -->
+    <aside class="sidebar">
+        <div class="ministerio-box">
+            <img th:src="@{/images/escudo-peru.png}" width="40" alt="Escudo del Perú">
+            <div>
+                <div class="min-rojo">PERÚ</div>
+                <div class="min-gris">Ministerio del Interior</div>
+            </div>
+        </div>
+
+        <div class="user-box">
+            <img src="https://cdn-icons-png.flaticon.com/128/847/847969.png" width="60">
+            <p><strong>Bienvenido(a)</strong><br>
+                <span th:text="${#authentication.name}">Usuario</span><br><em>Operador</em></p>
+            <a href="#">Mi perfil</a><br>
+            <a th:href="@{/login}">Cerrar sesión</a>
+        </div>
+
+        <nav>
+            <ul>
+                <li><strong>BASE DE DATOS RR.CC</strong></li>
+                <li>Base Rondera</li>
+                <li>Ronderos</li>
+                <li><strong>ACTIVIDADES DRC</strong></li>
+                <li>Sensibilización a RR.CC.</li>
+                <li>Sensibilización a PNP_AP</li>
+                <li><strong>Articulación</strong></li>
+                <li>Articulación Sectorial</li>
+                <li>Articulación Intersectorial</li>
+                <li>Relacionamiento comunal</li>
+                <li><strong>Seguimiento a riesgos</strong></li>
+                <li>Casos</li>
+                <li>Reportes</li>
+                <li>Alerta</li>
+                <li>Seguimiento</li>
+                <li>Protesta</li>
+                <li><strong>Dashboard</strong></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="content">
+        <h2>Lista de Alertas</h2>
+
+        <!-- Filtros -->
+        <form th:action="@{/dashboard}" method="get" class="filtros">
+            <div class="search-box">
+                <input type="text" name="buscar" th:value="${buscar}" placeholder="Buscar" class="input-text">
+                <span class="search-icon">&#128269;</span>
+            </div>
+
+            <div class="grupo">
+                <div class="grupo-item">
+                    <label>Departamento</label>
+                    <select id="departamento" name="departamento" th:attr="data-valor=${departamento}">
+                        <option value="">Seleccione</option>
+                    </select>
+                </div>
+
+                <div class="grupo-item">
+                    <label>Provincia</label>
+                    <select id="provincia" name="provincia" th:attr="data-valor=${provincia}">
+                        <option value="">Seleccione</option>
+                    </select>
+                </div>
+
+                <div class="grupo-item">
+                    <label>Distrito</label>
+                    <select id="distrito" name="distrito" th:attr="data-valor=${distrito}">
+                        <option value="">Seleccione</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-buscar">Buscar</button>
+            <a th:href="@{/alerta/form}" class="btn btn-agregar">Agregar</a>
+            <button class="btn btn-excel" type="button">Excel</button>
+        </form>
+
+        <!-- Tabla de alertas -->
+        <section style="overflow-x: auto;">
+            <table class="tabla-alertas">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Acciones de protesta</th>
+                    <th>Departamento</th>
+                    <th>Provincia</th>
+                    <th>Distrito</th>
+                    <th>Localidad</th>
+                    <th>Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="alerta, iStat : ${pagina.content}">
+                    <td th:text="${pagina.number * pagina.size + iStat.index + 1}">1</td>
+                    <td th:text="${alerta.acciones}">-</td>
+                    <td th:text="${alerta.departamento}">-</td>
+                    <td th:text="${alerta.provincia}">-</td>
+                    <td th:text="${alerta.distrito}">-</td>
+                    <td th:text="${alerta.localidad}">-</td>
+                    <td>
+                        <a th:href="@{'/alerta/editar/' + ${alerta.id}}">
+                            <img src="https://cdn-icons-png.flaticon.com/16/1159/1159633.png" alt="editar">
+                        </a>
+                        <a th:href="@{'/alerta/eliminar/' + ${alerta.id}}"
+                           onclick="return confirm('¿Está seguro de eliminar esta alerta?')">
+                            <img src="https://cdn-icons-png.flaticon.com/16/1214/1214428.png" alt="eliminar">
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Paginación -->
+        <div class="paginacion" th:if="${pagina.totalPages > 1}">
+            <a th:if="${!pagina.first}"
+               th:href="@{/dashboard(page=${pagina.number - 1}, buscar=${buscar}, departamento=${departamento}, provincia=${provincia}, distrito=${distrito})}">&laquo;</a>
+
+            <a th:each="i : ${#numbers.sequence(0, pagina.totalPages - 1)}"
+               th:href="@{/dashboard(page=${i}, buscar=${buscar}, departamento=${departamento}, provincia=${provincia}, distrito=${distrito})}"
+               th:text="${i + 1}"
+               th:classappend="${pagina.number == i} ? 'activo' : ''">
+            </a>
+
+            <a th:if="${!pagina.last}"
+               th:href="@{/dashboard(page=${pagina.number + 1}, buscar=${buscar}, departamento=${departamento}, provincia=${provincia}, distrito=${distrito})}">&raquo;</a>
+        </div>
+
+    </main>
+</div>
+
+<script src="/js/ubigeo.js"></script>
+</body>
+</html>
